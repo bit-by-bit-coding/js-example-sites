@@ -16,6 +16,7 @@ let pElement = document.getElementById("message");
 let imageElement = document.getElementById("picture");
 let button1Element = document.getElementById("button1");
 let button2Element = document.getElementById("button2");
+let button3Element = document.getElementById("button3");
 let p2Element = document.getElementById("pocket");
 let inputElement = document.getElementById("response")
 let submitButtonElement = document.getElementById("submit");
@@ -29,28 +30,28 @@ function play() {
         items[i].hasItem = false;
     }
     //go to woods
-    continueStory("You came to the woods.", "Go Left", "Go Right", goLeft, goRight, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("You came to the woods.", "Go Left", "Go Right", "Die", goLeft, goRight, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 //Locations
 function goToVillage() {
-    continueStory("You come to a bustling village.", "Go to the Market", "Die", goToMarket, die, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("You come to a bustling village.", "Go to the Market", "Go right, up a hill", "Die", goToMarket, goToCastle, die, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToMarket() {
-    continueStory("Welcome to the market! You can buy and sell items here.", "Buy", "Sell", buy, sell, "https://images.unsplash.com/photo-1574586597013-29bd92dc1617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1225&q=80");
+    continueStory("Welcome to the market! You can buy and sell items here.", "Buy", "Sell", "Return to village", buy, sell, goToVillage, "https://images.unsplash.com/photo-1574586597013-29bd92dc1617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1225&q=80");
 }
 
 function goToCastle() {
     items[1].hasItem = true;
-    continueStory("You trudge up a hill to find a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", tryDoor, goToVillage, "https://images.unsplash.com/photo-1524397057410-1e775ed476f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("You trudge up a hill to find a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images.unsplash.com/photo-1524397057410-1e775ed476f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 // Transactions
 function buy() {
     inputElement.style.display = "inline";
     submitButtonElement.style.display = "block";
-    continueStory("What would you like to buy? Type 'key' into the input box, then click Submit.", "Sell instead", "Go back to the village", sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    continueStory("What would you like to buy? Type 'key' into the input box, then click Submit.", "Sell instead", "Go back to the village", "Die randomly", sell, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
             transact(items[0], true);
@@ -64,7 +65,7 @@ function buy() {
 function sell() {
     inputElement.style.display = "inline";
     submitButtonElement.style.display = "block";
-    continueStory("What would you like to sell? Type 'ruby' into the input box, then click Submit.", "Buy instead", "Go back to the village", buy, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    continueStory("What would you like to sell? Type 'ruby' into the input box, then click Submit.", "Buy instead", "Go back to the village", "Die", buy, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "ruby") {
             transact(items[1], false);
@@ -96,11 +97,15 @@ function transact(item, isBuying) {
 
 // Transportation
 function goLeft() {
-    continueStory("You find a rushing river. How will you cross it?", "Boat", "Swim", goToBoat, swim, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("You find a rushing river. How will you cross it?", "Boat", "Swim", "Travel Interdimensionally", goToBoat, swim, interdimensionalTravel, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToBoat() {
-    continueStory("You hop in the boat floating by the bank and row over to the other side. You see houses through the trees in front of you. To the left of you is more forest and what looks like a stone tower. ", "Go toward the houses", "Go toward the tower", goToVillage, goToCastle, "https://images.unsplash.com/photo-1527287993547-b5d3ad9ca875?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1580&q=80");
+    continueStory("You hop in the boat floating by the bank and row over to the other side. You see houses through the trees in front of you. To the left of you is more forest and what looks like a stone tower.", "Go toward the houses", "Go toward the tower", "Try swimming back through the river", goToVillage, goToCastle, swim, "https://images.unsplash.com/photo-1527287993547-b5d3ad9ca875?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1580&q=80");
+}
+
+function interdimensionalTravel() {
+    continueStory("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", "Play Again", "Restart", "Go back to the woods (and restart)", die, die, die, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
 }
 
 function tryDoor() {
@@ -126,29 +131,33 @@ function goRight() {
 }
 
 function die() {
-    changeButtons("Restart at the woods", "Restart at the woods", play, play);
+    changeButtons("Restart at the woods", "Restart at the woods", "Restart at the woods", play, play, play);
 }
 
-function continueStory(story, choice1, choice2, choice1Function, choice2Function, source) {
+function continueStory(story, choice1, choice2, choice3, choice1Function, choice2Function, choice3Function, source) {
     showInventory();
     pElement.innerText = story;
-    changeButtons(choice1, choice2, choice1Function, choice2Function);
+    changeButtons(choice1, choice2, choice3, choice1Function, choice2Function, choice3Function);
     imageElement.src = source;
 }
 
-function changeButtons(choice1, choice2, choice1Function, choice2Function) {
+function changeButtons(choice1, choice2, choice3, choice1Function, choice2Function, choice3Function) {
     button1Element.innerText = choice1;
     button2Element.innerText = choice2;
+    button3Element.innerText = choice3;
     button1Element.onclick = choice1Function;
     button2Element.onclick = choice2Function;
+    button3Element.onclick = choice3Function;
 }
 
 function showInventory() {
     p2Element.innerText = "You have in your pocket: some air";
     for (let i = 0; i < pocket.length; i++) {
-        p2Element.innerText += ", " + pocket[i].name;
+        if(items[i].hasItem) {
+            p2Element.innerText += ", a" + items[i].name;
+        }
     }
-    p2Element.innerHTML = "<br> You have " + coins + " coins.";
+    p2Element.innerHTML += "<br> You have " + coins + " coins.";
 }
 
 //why not just change html? bc you can't vary it
