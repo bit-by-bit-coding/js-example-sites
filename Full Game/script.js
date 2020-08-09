@@ -28,7 +28,7 @@ play();
 
 //Locations
 function goToVillage() {
-    continueStory("Village Center", "You come to a bustling village.", "Go to the Market", "Walk around", "Go right, up a hill", goToMarket, goToOutskirts, goToCastle, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Village Center", "You come to a bustling village.", "Go to the Market", "Go right, up a hill", "Walk to the outskirts", goToMarket, goToCastle, goToOutskirts, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToMarket() {
@@ -49,23 +49,44 @@ function goToMarket() {
 }
 
 function goToOutskirts() {
-    continueStory("Village Outskirts", "You arrive at the outskirts of the village. There, several villagers", "Buy", "Sell", "Return to Village Center", goToTavern, goToVillage, goToCastle, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
-    showInput("Calculate");
-    submitButtonElement.onclick = () => {
-        if (inputElement.value === "key") {
+    continueStory("Village Outskirts", "Soon, the rows of houses give way to more and more open space. As you being to wander away from the village center, you overhear a group of villagers gesturing and discussing passionately.", "Investigate", "Enter the Tavern", "Return to Village Center", investigate, goToTavern, goToVillage, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f49b7fed-bb8c-4ce3-b207-f7ea09481dc9/d8ze8pd-63453f43-6bad-457b-b6e5-304a8013200e.png/v1/fill/w_1036,h_772,q_70,strp/pirogovo_2_by_vityar83_d8ze8pd-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDE4IiwicGF0aCI6IlwvZlwvZjQ5YjdmZWQtYmI4Yy00Y2UzLWIyMDctZjdlYTA5NDgxZGM5XC9kOHplOHBkLTYzNDUzZjQzLTZiYWQtNDU3Yi1iNmU1LTMwNGE4MDEzMjAwZS5wbmciLCJ3aWR0aCI6Ijw9MTM2NiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6OqyMRbB291fO2AUZeB6Eek3qL0Xp_N6cQ13QXWqbVc");
+}
 
+function goToCastle() {
+    items[1].hasItem = true;
+    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Go downhill to the village", "Try the door", "Die Randomly", goToVillage, tryDoor, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
+}
+
+function goToTreasureRoom() {
+    continueStory("Treasure Room", "You found the treasure room! Small problem though: there's a very angry dragon sitting on top of all the gold.", "Run!", "Battle the Dragon!", "Eat Cheese", goToCastle, battle, eatCheese, "https://thumbs-prod.si-cdn.com/dDELtbwEtmDWEfjMw2HaDlU_5uQ=/fit-in/1600x0/filters:focal(949x245:950x246)/https://public-media.si-cdn.com/filer/6a/e6/6ae65dac-2e24-452d-a39e-0a6a7fb280f0/smaug_par_david_demaret.jpg");
+}
+
+// Minigames
+function repairHomes() {
+    hideButtons();
+    showInput("Calculate");
+    continueStory("Sorting Cattle", "It turns out all the cows have wandered into one area and the villagers are trying to figure out how many cows they each have. 'I have twice as many cows as Silva,' says Zahra. 'I have two more cows than Zahra,' says Rishi. There are 42 cows in total. How many cows does Rishi own?", "Go to the Market", "Enter the Tavern", "Return to Village Center", goToMarket, goToTavern, goToVillage, "https://images.unsplash.com/photo-1566040924976-f837330d1a5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+}
+
+function sortCattle() {
+    hideButtons();
+    showInput("Calculate");
+    continueStory("Sorting Cattle", "It turns out all the cows have wandered into one area and the villagers are trying to figure out how many cows they each have. 'I have twice as many cows as Silva,' says Zahra. 'I have two more cows than Zahra,' says Rishi. There are 42 cows in total. How many cows does Rishi own?", "Go to the Market", "Enter the Tavern", "Return to Village Center", goToMarket, goToTavern, goToVillage, "https://images.unsplash.com/photo-1566040924976-f837330d1a5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+    submitButtonElement.onclick = () => {
+        let guess = inputElement.value;
+        if (guess == 18) {
+            army += 20;
+            alert("You're as cool as a cucumber as you handle the crisis, correctly giving Silva 8 cows, Zahra 16 cows, and Rishi 18 cows. You become very popular with the villagers, who dub you the magistrate.");
+            showButtons();
+            goToOutskirts();
         } else {
-            alert("That's not a valid item to trade.");
+            alert("You take a guess, but " + guess + " isn't the right number of cows, and the confusion continues. Try again?");
         }
     }
 }
 
-function goToTavern() {
-    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
-}
-
 function gamble() {
-    continueStory("Dice Minigame", "You decide to join the game of dice. Each die has twenty sides (you can roll a number between 1 and 20). If the two numbers on your dice are greater than 25, then each of the three villagers at the table will give you your bet. If you lose, you'll lose the money you betted. How much do you want to bet?", "Get a drink", "Leave the tavern", "Return to Village Center", buyDrink, goToTavern, goToVillage, "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1265&q=80");
+    continueStory("Dice Minigame", "You decide to join the game of dice. Each die has twenty sides (you can roll a number between 1 and 20). If the two numbers on your dice are greater than 25, then each of the three villagers at the table will give you your bet. If you lose, you'll lose the money you betted. If you win, you might just earn a name for yourself! How much do you want to bet?", "Get a drink", "Leave the tavern", "Return to Village Center", buyDrink, goToTavern, goToVillage, "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1265&q=80");
     showInput("Bet and Play");
     submitButtonElement.onclick = () => {
         let bet = inputElement.value;
@@ -73,11 +94,12 @@ function gamble() {
             let roll1 = Math.floor(Math.random() * 21);
             let roll2 = Math.floor(Math.random() * 21);
             let sum = roll1 + roll2;
-            alert("Your first die teeters and rolls on" + roll1 + "!");
+            alert("Your first die teeters and rolls on " + roll1 + "!");
             alert("Your second die turns up as a..." + roll2 + "!");
             if ((roll1 + roll2) > 25) {
-                alert("You rolled a total of " + sum + " and won! The three villagers give you " + bet + " coins apiece.");
+                alert("You rolled a total of " + sum + " and won! The three villagers give you " + bet + " coins apiece. Four villagers tip their hats in respect.");
                 coins += 3 * bet;
+                army += 4;
                 showInventory();
             } else {
                 alert("You rolled a total of " + sum + " and lost. :( You reluctantly hand over your " + bet + "-coin bet.")
@@ -90,13 +112,8 @@ function gamble() {
     }
 }
 
-function goToCastle() {
-    items[1].hasItem = true;
-    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
-}
-
-function goToTreasureRoom() {
-    continueStory("Treasure Room", "You found the treasure room! Small problem though: there's a very angry dragon sitting on top of all the gold.", "Run!", "Battle the Dragon!", "Eat Cheese", goToCastle, battle, eatCheese, "https://thumbs-prod.si-cdn.com/dDELtbwEtmDWEfjMw2HaDlU_5uQ=/fit-in/1600x0/filters:focal(949x245:950x246)/https://public-media.si-cdn.com/filer/6a/e6/6ae65dac-2e24-452d-a39e-0a6a7fb280f0/smaug_par_david_demaret.jpg");
+function goToTavern() {
+    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
 }
 
 // Transactions
@@ -151,7 +168,7 @@ function buyDrink() {
 
 function battle() {
     if (army > 30) {
-        continueStory("Dragon's Lair", "Your massive army stands behind you. All of them unsheathe their swords and wave them in the air, unintentionally revealing their armpits. The dragon wrinkles its nose at all that body odor. Dragons have a sensitive sense of smell, you know. Anyway, the dragon's gone, so you can take all the treasure now.", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+        continueStory("Dragon's Lair", "Your massive army stands behind you. All of them unsheathe their swords and wave them in the air. The dragon wrinkles its nose at all those exposed armpits reeking of BO. Dragons have a sensitive sense of smell, you know. Anyway, the dragon's gone, so you can take all the treasure!", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
         coins += 10000;
         showInventory();
     } else {
@@ -159,7 +176,15 @@ function battle() {
     }
 }
 
-// Transportation
+// Moving Between Locations
+function investigate() {
+    if (Math.random() < 0.5) {
+        sortCattle();
+    } else {
+        repairHomes();
+    }
+}
+
 function goToRiver() {
     continueStory("River", "You find a rushing river. How will you cross it?", "Swim", "Boat", "Travel Interdimensionally", swim, goToBoat, interdimensionalTravel, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
@@ -187,7 +212,7 @@ function interdimensionalTravel() {
 }
 
 function swim() {
-    badEnding("Started by Slugs", "You dive into the river, 10-foot tall waves frothing and storming around you! You battle couragenously through the turbulent whorls (conveniently ignoring how there was a literal boat next to you earlier). Finally, you feel the riverbed beneath your toes. You're two feet away from dry land when you step on something squishy. It's a sea slug! And...*gasp*...it's bright orange! You died of surprise. Try again?", goToRiver, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("Startled by Slugs", "You dive into the river, 10-foot tall waves frothing and storming around you! You battle couragenously through the turbulent whorls (conveniently ignoring how there was a literal boat next to you earlier). Finally, you feel the riverbed beneath your toes. You're two feet away from dry land when you step on something squishy. It's a sea slug! And...*gasp*...it's bright orange! You died of surprise. Try again?", goToRiver, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToCliff() {
@@ -216,7 +241,7 @@ function continueStory(location, story, choice1, choice2, choice3, choice1Functi
     h1Element.innerText = location;
     inputElement.style.display = "none";
     submitButtonElement.style.display = "none";
-    pElement.innerText = story;
+    pElement.innerHTML = story;
     changeButtons(choice1, choice2, choice3, choice1Function, choice2Function, choice3Function);
     imageElement.src = source;
 }
@@ -234,6 +259,16 @@ function changeButtons(choice1, choice2, choice3, choice1Function, choice2Functi
     button3Element.onclick = choice3Function;
 }
 
+function hideButtons() {
+    button1Element.style.display = "none";
+    button2Element.style.display = "none";
+}
+
+function showButtons() {
+    button1Element.style.display = "inline";
+    button2Element.style.display = "inline";
+}
+
 function showInventory() {
     p2Element.innerText = "You have in your pocket: some cheese";
     for (let i = 0; i < items.length; i++) {
@@ -242,6 +277,10 @@ function showInventory() {
         }
     }
     p2Element.innerHTML += "<br> You have " + coins + " coins.";
+    p2Element.innerHTML += "<br> Your friends (" + army + "):<br>";
+    for (let i = 0; i < army; i++) {
+        p2Element.innerHTML += '<img src="https://gamepedia.cursecdn.com/minecraft_gamepedia/d/d8/Plains_Villager_Base.png" width="20px">';
+    }
 }
 
 function showInput(buttonText) {
@@ -252,6 +291,6 @@ function showInput(buttonText) {
 
 function checkWin() {
     if (items[2].hasItem) {
-        alert("You finally did it... that's right. You acquired A DELICIOUS TACO!!! Congratulations on finishing your quest!");
+        alert("You finally did it. That's right. You acquired a delicious taco!!! Congratulations on finishing your grand, perilous, magical quest, and bon appetite.");
     }
 }
