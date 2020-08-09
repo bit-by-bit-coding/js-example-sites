@@ -12,6 +12,7 @@ let army = 0;
 let isBuying = true;
 let caughtThief = false;
 let sortedCattle = false;
+let foughtDragon = false;
 
 // The DOM ------
 
@@ -30,11 +31,11 @@ play();
 
 //Locations
 function goToVillage() {
-    continueStory("Village Center", "You come to a bustling village.", "Go to the Market", "Go right, up a hill", "Walk to the outskirts", goToMarket, goToCastle, goToOutskirts, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Village Center", "You come to a bustling village full of new sights and sounds.", "Go to the Market", "Go right, up a hill", "Walk to the outskirts", goToMarket, goToCastle, goToOutskirts, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToMarket() {
-    continueStory("Market", "Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'taco') into the input box and click Trade.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://i.ytimg.com/vi/19dx6AkC_GY/maxresdefault.jpg");
+    continueStory("Market", "Welcome to the market! You can buy and sell items here. Items for trade:<ul><li>key: 40 coins</li><li>ruby: 100 coins</li><li>taco: 10000 coins</li></ul> Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'taco') into the input box and click Trade.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://i.ytimg.com/vi/19dx6AkC_GY/maxresdefault.jpg");
     showInput("Trade");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
@@ -56,11 +57,16 @@ function goToOutskirts() {
 
 function goToCastle() {
     items[1].hasItem = true;
-    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Go downhill to the village", "Try the door", "Die Randomly", goToVillage, tryDoor, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
+    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Go downhill to the village", "Try the door", "Walk around the village", goToVillage, tryDoor, goToOutskirts, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
 }
 
 function goToTreasureRoom() {
-    continueStory("Treasure Room", "You found the treasure room! Small problem though: there's a very angry dragon sitting on top of all the gold.", "Run!", "Battle the Dragon!", "Eat Cheese", goToCastle, battle, eatCheese, "https://thumbs-prod.si-cdn.com/dDELtbwEtmDWEfjMw2HaDlU_5uQ=/fit-in/1600x0/filters:focal(949x245:950x246)/https://public-media.si-cdn.com/filer/6a/e6/6ae65dac-2e24-452d-a39e-0a6a7fb280f0/smaug_par_david_demaret.jpg");
+    if (foughtDragon) {
+        continueStory("Treasure Room", "The treasure room lies empty.", "Go back outside", "Go back outside", "Go back outside", goToCastle, goToCastle, goToCastle, "https://www.deviantart.com/exitmothership/art/Dizzy-Hearts-Queen-Llend-s-Ballroom-725524009");
+        hideButtons();
+    } else {
+        continueStory("Treasure Room", "You found the treasure room! Small problem though: there's a very angry dragon sitting on top of all the gold.", "Run!", "Battle the Dragon!", "Eat Cheese", goToCastle, battle, eatCheese, "https://thumbs-prod.si-cdn.com/dDELtbwEtmDWEfjMw2HaDlU_5uQ=/fit-in/1600x0/filters:focal(949x245:950x246)/https://public-media.si-cdn.com/filer/6a/e6/6ae65dac-2e24-452d-a39e-0a6a7fb280f0/smaug_par_david_demaret.jpg");
+    }
 }
 
 // Minigames
@@ -144,9 +150,12 @@ function transact(item, isBuying) {
         if (coins >= item.value) {
             coins -= item.value;
             item.hasItem = true;
-            alert("You bought a " + item.name);
+            alert("You bought a " + item.name + ".");
+            if (items[2].hasItem) {
+                winGame();
+            }
         } else {
-            alert("You don't have enough money for a " + item.name + ". A " + item.name + " costs " + item.value + " coins.");
+            alert("You don't have enough money to buy a " + item.name + ". A " + item.name + " costs " + item.value + " coins.");
         }
     } else {
         if (item.hasItem) {
@@ -179,8 +188,9 @@ function buyDrink() {
 }
 
 function battle() {
-    if (army > 30) {
-        continueStory("Dragon's Lair", "Your massive army stands behind you. All of them unsheathe their swords and wave them in the air. The dragon wrinkles its nose at all those exposed armpits reeking of BO. Dragons have a sensitive sense of smell, you know. Anyway, the dragon's gone, so you can take all the treasure!", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    if (army >= 40) {
+        continueStory("Legendary Fight", "Your massive army stands behind you. All of them unsheathe their swords and wave them in the air. The dragon wrinkles its nose at all those exposed armpits reeking of BO. Dragons have a sensitive sense of smell, you know. Anyway, the dragon's gone, so you can take all the treasure!", "Return to the village", "Share the treasure", "Melt the Coins", goToVillage, shareTreasure, meltCoins, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fd3a8fb7-5eef-4ae8-857d-977ef347f1e3/ddyvzm7-f52d3612-155d-4ce9-a6fc-e0dfdf39a709.jpg/v1/fill/w_1342,h_596,q_70,strp/_ice_and_fire__by_era7_ddyvzm7-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMTM3IiwicGF0aCI6IlwvZlwvZmQzYThmYjctNWVlZi00YWU4LTg1N2QtOTc3ZWYzNDdmMWUzXC9kZHl2em03LWY1MmQzNjEyLTE1NWQtNGNlOS1hNmZjLWUwZGZkZjM5YTcwOS5qcGciLCJ3aWR0aCI6Ijw9MjU2MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.CrTZkXpiqJW47SjFVEGRq4d_oACirbRo2MjmGvtlmlI");
+        foughtDragon = true;
         coins += 10000;
         showInventory();
     } else {
@@ -215,7 +225,7 @@ function goToBoat() {
 
 function tryDoor() {
     if (items[0].hasItem) {
-        alert("The door unlocked!");
+        alert("You unlock the door with your key and the gates swing open!");
         goToTreasureRoom();
     } else {
         alert("The door is very locked. Maybe you should look for a key?");
@@ -223,6 +233,12 @@ function tryDoor() {
 }
 
 // Fatal choices
+function meltCoins() {
+    coins -= 10000;
+    showInventory();
+    badEnding("Melted Coins", "You melt 10000 gold coins, before realizing you'll never be able to buy your taco now. Why would you do that?", battle, "https://images.unsplash.com/photo-1586974710160-55f48f417990?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1353&q=80");
+}
+
 function eatCheese() {
     badEnding("Dragon's Belly", "You nervously reach in your pocket and start nibbling some cheese. The dragon proceeds to make you into a grilled cheese sandwich. Eating cheese solves many problems, but battling dragons is not one of them.", goToTreasureRoom, "https://images.unsplash.com/photo-1528736235302-52922df5c122?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1644&q=80");
 }
@@ -251,14 +267,18 @@ function play() {
     for (let i = 0; i < items.length; i++) {
         items[i].hasItem = false;
     }
-    caughtThief, sortedCattle = false;
+
+    //reset experience;
+    caughtThief = false;
+    sorttedCattle = false;
+    foughtDragon = false;
+
     //go to woods
     continueStory("Our Journey Begins...", "Welcome, explorer! You're on a grand, perilous, magical quest to buy a delicious taco &#127790;. At the moment, however, you're stuck in some unfamiliar woods. Survive the wilderness and escape the forest first!", "Go Left", "Go Right", "CHEAT: Skip to village", goToRiver, goToCliff, goToVillage, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function continueStory(location, story, choice1, choice2, choice3, choice1Function, choice2Function, choice3Function, source) {
     showInventory();
-    checkWin();
     showButtons();
     h1Element.innerText = location;
     inputElement.style.display = "none";
@@ -306,13 +326,13 @@ function showInventory() {
 }
 
 function showInput(buttonText) {
+    inputElement.value = "";
     inputElement.style.display = "inline";
     submitButtonElement.style.display = "block";
     submitButtonElement.innerText = buttonText;
 }
 
-function checkWin() {
-    if (items[2].hasItem) {
-        alert("You finally did it. That's right. You acquired a delicious taco!!! Congratulations on finishing your grand, perilous, magical quest, and bon appetite.");
-    }
+function winGame() {
+    continueStory("Holy Guacamole!", "You did it! That's right -- you've completed your grand, perilous, magical quest to buy a delicious taco, which you can now munch on with absolute satisfaction. Ahhh, who doesn't love a dose of dragons and adventure before breakfast?", "Keep playing", "Restart", "Restart", goToMarket, play, play, "https://images.unsplash.com/photo-1566740932818-cacfb780ae18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+    item[2].hasItem = false;
 }
