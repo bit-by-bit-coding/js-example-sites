@@ -338,3 +338,15 @@ function winGame() {
     continueStory("Holy Guacamole!", "You did it! That's right -- you've completed your grand, perilous, magical quest to buy a delicious taco, which you can now munch on with absolute satisfaction. Ahhh, who doesn't love a dose of dragons and adventure before breakfast?", "Keep playing", "Restart", "Restart", goToMarket, play, play, "https://images.unsplash.com/photo-1566740932818-cacfb780ae18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
     item[2].hasItem = false;
 }
+
+// Hints ------
+let hints = document.getElementById("hints");
+hints.onclick = () => {
+    hints.classList.toggle("active");
+    let content = hints.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+}
