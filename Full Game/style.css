@@ -19,11 +19,21 @@ body {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
+    align-items: center;
     width: 40vw;
+}
+
+#story p {
+    align-self: left;
 }
 
 #buttons {
     display: flex;
+    align-self: center;
+}
+
+#button3 {
+    align-self: center;
 }
 
 #input {

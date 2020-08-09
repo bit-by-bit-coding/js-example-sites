@@ -9,6 +9,7 @@ class Item {
 let items = [new Item("key", 20), new Item("ruby", 100), new Item("french fries", 10000)];
 let coins = 0;
 let army = 0;
+let isBuying = true;
 
 // The DOM ------
 
@@ -37,11 +38,42 @@ function play() {
 
 //Locations
 function goToVillage() {
-    continueStory("You come to a bustling village.", "Go to the Market", "Go right, up a hill", "Die", goToMarket, goToCastle, die, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("You come to a bustling village.", "Go to the Market", "Walk around", "Go right, up a hill", goToMarket, goToOutskirts, goToCastle, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToMarket() {
-    continueStory("Welcome to the market! You can buy and sell items here.", "Buy", "Sell", "Return to village", buy, sell, goToVillage, "https://images.unsplash.com/photo-1574586597013-29bd92dc1617?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1225&q=80");
+    continueStory("Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'a bag of french fries') into the input box and click Submit.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    inputElement.style.display = "inline";
+    submitButtonElement.style.display = "block";
+    submitButtonElement.onclick = () => {
+        if (inputElement.value === "key") {
+            transact(items[0], isBuying);
+        } else if (inputElement.value === "ruby") {
+            transact(items[1], isBuying);
+        } else if (inputElement.value === "a bag of french fries") {
+            transact(items[2], isBuying);
+        } else {
+            alert("That's not a valid item to trade.");
+        }
+    }
+    showInventory();
+}
+
+function goToOutskirts() {
+    continueStory("You arrive at the outskirts of the village. There, several villagers", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    inputElement.style.display = "inline";
+    submitButtonElement.style.display = "block";
+    submitButtonElement.onclick = () => {
+        if (inputElement.value === "key") {
+            transact(items[0], isBuying);
+        } else if (inputElement.value === "ruby") {
+            transact(items[1], isBuying);
+        } else if (inputElement.value === "a bag of french fries") {
+            transact(items[2], isBuying);
+        } else {
+            alert("That's not a valid item to trade.");
+        }
+    }
 }
 
 function goToCastle() {
@@ -55,42 +87,22 @@ function goToTreasureRoom() {
 
 // Transactions
 function buy() {
-    continueStory("What would you like to buy? Type 'key' or 'french fries' into the input box, then click Submit.", "Sell instead", "Go back to the village", "Die randomly", sell, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
-    inputElement.style.display = "inline";
-    submitButtonElement.style.display = "block";
-    submitButtonElement.onclick = () => {
-        if (inputElement.value === "key") {
-            transact(items[0], true);
-        } else if (inputElemetn.value === "french fries") {
-            transact(items[2], true);
-        } else {
-            alert("That's not a valid item to buy.");
-        }
-    }
-    showInventory();
+    isBuying = true;
 }
 
 function sell() {
-    continueStory("What would you like to sell? Type 'ruby' into the input box, then click Submit.", "Buy instead", "Go back to the village", "Die", buy, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
-    inputElement.style.display = "inline";
-    submitButtonElement.style.display = "block";
-    submitButtonElement.onclick = () => {
-        if (inputElement.value === "ruby") {
-            transact(items[1], false);
-        } else {
-            alert("That's not a valid item to sell.");
-        }
-    }
+    isBuying = false;
 }
 
 function transact(item, isBuying) {
+    imageElement.src = "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80";
     if (isBuying) {
         if (coins >= item.value) {
             coins -= item.value;
             item.hasItem = true;
             alert("You bought a " + item.name);
         } else {
-            alert("You don't have enough money for a " + item.name + ". " + item.name + " costs " + item.value + ".");
+            alert("You don't have enough money for a " + item.name + ". A " + item.name + " costs " + item.value + " coins.");
         }
     } else {
         if (item.hasItem) {
@@ -116,9 +128,11 @@ function shareTreasure() {
 
 function battle() {
     if (army > 30) {
-        continueStory("Your massive army stands behind you. All of them unsheathe their swords and wave them in the air, unintentionally revealing their armpits. The dragon wrinkles her nose at all that body odor. Dragons have a sensitive sense of smell, you know. Anyway, you can take all the treasure now.", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+        continueStory("Your massive army stands behind you. All of them unsheathe their swords and wave them in the air, unintentionally revealing their armpits. The dragon wrinkles its nose at all that body odor. Dragons have a sensitive sense of smell, you know. Anyway, the dragon's gone, so you can take all the treasure now.", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+        coins += 10000;
+        showInventory();
     } else {
-        badEnding("Unfortunately, the dragon was not in a good mood today. Maybe you need more support.", "https://i.pinimg.com/originals/80/7b/69/807b696afbd11692f90219a7922f2005.jpg");
+        badEnding("Unfortunately, the dragon was not in a good mood today. Try making more friends before you go around fighting dragons. Teamwork makes the dream work!", goToTreasureRoom, "https://www.rpnation.com/gallery/dragon-fire-android-wallpapers.26804/full?d=1494007413");
     }
 }
 
@@ -142,7 +156,7 @@ function tryDoor() {
 
 // Fatal choices
 function eatCheese() {
-    badEnding("You nervously reach in your pocket and start nibbling some cheese. The dragon proceeds to make you into a grilled cheese sandwich. Eating cheese solves many problems, but this is not one of them.", goToTreasureRoom, "https://images.unsplash.com/photo-1528736235302-52922df5c122?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1644&q=80");
+    badEnding("You nervously reach in your pocket and start nibbling some cheese. The dragon proceeds to make you into a grilled cheese sandwich. Eating cheese solves many problems, but battling dragons is not one of them.", goToTreasureRoom, "https://images.unsplash.com/photo-1528736235302-52922df5c122?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1644&q=80");
 }
 
 function interdimensionalTravel() {
