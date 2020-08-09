@@ -6,7 +6,7 @@ class Item {
     }
 }
 
-let items = [new Item("key", 20), new Item("ruby", 100), new Item("a bag of french fries", 10000)];
+let items = [new Item("key", 20), new Item("ruby", 100), new Item("taco", 10000)];
 let coins = 0;
 let army = 0;
 let isBuying = true;
@@ -26,31 +26,20 @@ let submitButtonElement = document.getElementById("submit");
 
 play();
 
-function play() {
-    //reset inventory
-    coins = 0;
-    army = 0;
-    for (let i = 0; i < items.length; i++) {
-        items[i].hasItem = false;
-    }
-    //go to woods
-    continueStory("Our Journey Begins...", "Welcome, explorer! You're on a grand, perilous, magical quest to buy some delicious french fries. At the moment, however, you're stuck in some unfamiliar woods. Survive the wilderness and escape the forest first!", "Go Left", "Go Right", "CHEAT: Skip to village", goToRiver, goToCliff, goToVillage, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
-}
-
 //Locations
 function goToVillage() {
-    continueStory("Village Center", "You come to a bustling village.", "Go to the Market", "Walk around", "Go right, up a hill", goToMarket, goToOutskirts, goToCastle, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
+    continueStory("Village Center", "You come to a bustling village.", "Go to the Market", "Walk around", "Go right, up a hill", goToMarket, goToOutskirts, goToCastle, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToMarket() {
-    continueStory("Market", "Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'a bag of french fries') into the input box and click Trade.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://i.ytimg.com/vi/19dx6AkC_GY/maxresdefault.jpg");
+    continueStory("Market", "Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'taco') into the input box and click Trade.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://i.ytimg.com/vi/19dx6AkC_GY/maxresdefault.jpg");
     showInput("Trade");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
             transact(items[0], isBuying);
         } else if (inputElement.value === "ruby") {
             transact(items[1], isBuying);
-        } else if (inputElement.value === "a bag of french fries") {
+        } else if (inputElement.value === "taco") {
             transact(items[2], isBuying);
         } else {
             alert("That's not a valid item to trade.");
@@ -103,7 +92,7 @@ function gamble() {
 
 function goToCastle() {
     items[1].hasItem = true;
-    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6ff2ccfb-d302-4348-87bc-8b9568748e63/d7q7esw-bddb370b-31eb-401a-86eb-f68f437b69fe.jpg/v1/fill/w_723,h_1000,q_75,strp/sanctuary_by_jjcanvas_d7q7esw-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDAwIiwicGF0aCI6IlwvZlwvNmZmMmNjZmItZDMwMi00MzQ4LTg3YmMtOGI5NTY4NzQ4ZTYzXC9kN3E3ZXN3LWJkZGIzNzBiLTMxZWItNDAxYS04NmViLWY2OGY0MzdiNjlmZS5qcGciLCJ3aWR0aCI6Ijw9NzIzIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.b52NvktP8FU_yXPDLPAvYapyKQma9VcKqsXjZbWEMf8");
+    continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
 }
 
 function goToTreasureRoom() {
@@ -206,12 +195,24 @@ function goToCliff() {
 }
 
 // Functions to keep the game going
-function die() {
+function die() { // not supposed to be part of the game -- just for loose ends I can't tie up quickly
     changeButtons("Restart at the woods", "Restart at the woods", "Restart at the woods", play, play, play);
+}
+
+function play() {
+    //reset inventory
+    coins = 0;
+    army = 0;
+    for (let i = 0; i < items.length; i++) {
+        items[i].hasItem = false;
+    }
+    //go to woods
+    continueStory("Our Journey Begins...", "Welcome, explorer! You're on a grand, perilous, magical quest to buy a delicious taco &#127790;. At the moment, however, you're stuck in some unfamiliar woods. Survive the wilderness and escape the forest first!", "Go Left", "Go Right", "CHEAT: Skip to village", goToRiver, goToCliff, goToVillage, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function continueStory(location, story, choice1, choice2, choice3, choice1Function, choice2Function, choice3Function, source) {
     showInventory();
+    checkWin();
     h1Element.innerText = location;
     inputElement.style.display = "none";
     submitButtonElement.style.display = "none";
@@ -247,4 +248,10 @@ function showInput(buttonText) {
     inputElement.style.display = "inline";
     submitButtonElement.style.display = "block";
     submitButtonElement.innerText = buttonText;
+}
+
+function checkWin() {
+    if (items[2].hasItem) {
+        alert("You finally did it... that's right. You acquired A DELICIOUS TACO!!! Congratulations on finishing your quest!");
+    }
 }
