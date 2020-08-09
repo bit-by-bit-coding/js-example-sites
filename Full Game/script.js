@@ -58,6 +58,7 @@ function goToOutskirts() {
 function goToCastle() {
     items[1].hasItem = true;
     continueStory("Castle Gate", "Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Go downhill to the village", "Try the door", "Walk around the village", goToVillage, tryDoor, goToOutskirts, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fcb04791-9837-40cf-9484-bafcc8c45e72/d7ahq9v-e0609643-3743-4de1-ba49-54b95f0d90d8.jpg/v1/fill/w_1063,h_752,q_70,strp/palace_of_the_corsairs__harad_by_direimpulse_d7ahq9v-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNTA4IiwicGF0aCI6IlwvZlwvZmNiMDQ3OTEtOTgzNy00MGNmLTk0ODQtYmFmY2M4YzQ1ZTcyXC9kN2FocTl2LWUwNjA5NjQzLTM3NDMtNGRlMS1iYTQ5LTU0Yjk1ZjBkOTBkOC5qcGciLCJ3aWR0aCI6Ijw9NDk2MSJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.8k8Hmp3ze2NcXC_qNyReKFKbmkwdNcJWoepqgJ5C7H0");
+    alert("You now have a ruby!");
 }
 
 function goToTreasureRoom() {
@@ -336,4 +337,16 @@ function showInput(buttonText) {
 function winGame() {
     continueStory("Holy Guacamole!", "You did it! That's right -- you've completed your grand, perilous, magical quest to buy a delicious taco, which you can now munch on with absolute satisfaction. Ahhh, who doesn't love a dose of dragons and adventure before breakfast?", "Keep playing", "Restart", "Restart", goToMarket, play, play, "https://images.unsplash.com/photo-1566740932818-cacfb780ae18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
     item[2].hasItem = false;
+}
+
+// Hints ------
+let hints = document.getElementById("hints");
+hints.onclick = () => {
+    hints.classList.toggle("active");
+    let content = hints.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
 }

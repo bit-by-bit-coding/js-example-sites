@@ -40,14 +40,6 @@ body {
     display: flex;
 }
 
-#response {
-    display: none;
-}
-
-#submit {
-    display: none;
-}
-
 img {
     max-width: 50vw;
     max-height: 60vh;
@@ -69,3 +61,25 @@ button {
 button:hover {
     transform: scale(1.1);
 }
+
+#hints {
+    background-color: rgb(52, 52, 52);
+    color: white;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    transition: 0.4s;
+  }
+  
+  .active, #hints:hover {
+    background-color: rgb(75, 75, 75);
+    transform: scale(1);
+  }
+  
+  #hints-content {
+      width: 100%;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+  }
