@@ -51,15 +51,15 @@ button {
     
     box-shadow: 0 0 5px black;
     border: none;
-    border-radius: 20px;
+    border-radius: 40px;
     margin: 15px;
-    width: 150px;
-    height: 35px;
+    width: 200px;
+    height: 50px;
     transition-duration: 0.3s;
 }
 
 button:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #hints {
@@ -73,7 +73,7 @@ button:hover {
   }
   
   .active, #hints:hover {
-    background-color: rgb(75, 75, 75);
+    background-color: rgba(52, 52, 52, 0.9);
     transform: scale(1);
   }
   
