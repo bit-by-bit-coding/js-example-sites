@@ -62,7 +62,7 @@ function goToCastle() {
 
 function goToTreasureRoom() {
     if (foughtDragon) {
-        continueStory("Treasure Room", "The treasure room lies empty.", "Go back outside", "Go back outside", "Go back outside", goToCastle, goToCastle, goToCastle, "https://www.deviantart.com/exitmothership/art/Dizzy-Hearts-Queen-Llend-s-Ballroom-725524009");
+        continueStory("Treasure Room", "The treasure room lies empty.", "Go back outside", "Go back outside", "Go back outside", goToCastle, goToCastle, goToCastle, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/59e52d58-8bc8-4cc1-b8ea-7c573c3f0d9d/dbzyhwp-49189f95-cbf2-4694-8712-f085e140b922.jpg/v1/fill/w_1154,h_692,q_70,strp/dizzy_hearts__queen_llend_s_ballroom_by_exitmothership_dbzyhwp-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD03MjAiLCJwYXRoIjoiXC9mXC81OWU1MmQ1OC04YmM4LTRjYzEtYjhlYS03YzU3M2MzZjBkOWRcL2Rienlod3AtNDkxODlmOTUtY2JmMi00Njk0LTg3MTItZjA4NWUxNDBiOTIyLmpwZyIsIndpZHRoIjoiPD0xMjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.vEQpd8I8iJfkTGwi8Oyl726p4yXnNdcF0iD2uprEPgA");
         hideButtons();
     } else {
         continueStory("Treasure Room", "You found the treasure room! Small problem though: there's a very angry dragon sitting on top of all the gold.", "Run!", "Battle the Dragon!", "Eat Cheese", goToCastle, battle, eatCheese, "https://thumbs-prod.si-cdn.com/dDELtbwEtmDWEfjMw2HaDlU_5uQ=/fit-in/1600x0/filters:focal(949x245:950x246)/https://public-media.si-cdn.com/filer/6a/e6/6ae65dac-2e24-452d-a39e-0a6a7fb280f0/smaug_par_david_demaret.jpg");
@@ -105,7 +105,8 @@ function sortCattle() {
 }
 
 function gamble() {
-    continueStory("Dice Minigame", "You decide to join the game of dice. Each die has twenty sides (you can roll a number between 1 and 20). If the two numbers on your dice are greater than 25, then each of the three villagers at the table will give you your bet. If you lose, you'll lose the money you betted. If you win, you might just earn a name for yourself! How much do you want to bet?", "Get a drink", "Leave the tavern", "Return to Village Center", buyDrink, goToTavern, goToVillage, "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1265&q=80");
+    continueStory("Dice Minigame", "You decide to join the game of dice. Each die has twenty sides (you can roll a number between 1 and 20). If the two numbers on your dice are greater than 25, then each of the three villagers at the table will give you your bet. If you lose, you'll lose the money you betted. If you win, you might just earn a name for yourself! How much do you want to bet?", "Get a drink", "Leave the Table", "Leave the Table", buyDrink, goToTavern, goToTavern, "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1265&q=80");
+    hideButtons();
     showInput("Bet and Play");
     submitButtonElement.onclick = () => {
         let bet = inputElement.value;
@@ -132,7 +133,7 @@ function gamble() {
 }
 
 function goToTavern() {
-    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/59e52d58-8bc8-4cc1-b8ea-7c573c3f0d9d/dc5agah-531475c9-64cf-46f1-9c7e-35e7ea362aa6.jpg/v1/fill/w_800,h_480,q_75,strp/dizzy_hearts__tavern_by_exitmothership_dc5agah-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD00ODAiLCJwYXRoIjoiXC9mXC81OWU1MmQ1OC04YmM4LTRjYzEtYjhlYS03YzU3M2MzZjBkOWRcL2RjNWFnYWgtNTMxNDc1YzktNjRjZi00NmYxLTljN2UtMzVlN2VhMzYyYWE2LmpwZyIsIndpZHRoIjoiPD04MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.qXK79wqJngpyzjlQqdSrtH3SlYqbNpw8qiVBdGlG-88");
+    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToOutskirts, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/59e52d58-8bc8-4cc1-b8ea-7c573c3f0d9d/dc5agah-531475c9-64cf-46f1-9c7e-35e7ea362aa6.jpg/v1/fill/w_800,h_480,q_75,strp/dizzy_hearts__tavern_by_exitmothership_dc5agah-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD00ODAiLCJwYXRoIjoiXC9mXC81OWU1MmQ1OC04YmM4LTRjYzEtYjhlYS03YzU3M2MzZjBkOWRcL2RjNWFnYWgtNTMxNDc1YzktNjRjZi00NmYxLTljN2UtMzVlN2VhMzYyYWE2LmpwZyIsIndpZHRoIjoiPD04MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.qXK79wqJngpyzjlQqdSrtH3SlYqbNpw8qiVBdGlG-88");
 }
 
 // Transactions
@@ -194,7 +195,7 @@ function battle() {
         coins += 10000;
         showInventory();
     } else {
-        badEnding("The dragon burped...", "Unfortunately, the dragon was not in a good mood today. Try making more friends before you go around fighting dragons. Teamwork makes the dream work!", goToTreasureRoom, "https://www.rpnation.com/gallery/dragon-fire-android-wallpapers.26804/full?d=1494007413");
+        badEnding("The dragon burped...", "...and everything caught on fire. Unfortunately, the dragon was not in a good mood today. Try making more friends before you go around fighting dragons. Teamwork makes the dream work!", goToTreasureRoom, "https://www.rpnation.com/gallery/dragon-fire-android-wallpapers.26804/full?d=1494007413");
     }
 }
 
