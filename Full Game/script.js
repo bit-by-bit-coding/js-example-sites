@@ -10,6 +10,8 @@ let items = [new Item("key", 20), new Item("ruby", 100), new Item("taco", 10000)
 let coins = 0;
 let army = 0;
 let isBuying = true;
+let caughtThief = false;
+let sortedCattle = false;
 
 // The DOM ------
 
@@ -49,7 +51,7 @@ function goToMarket() {
 }
 
 function goToOutskirts() {
-    continueStory("Village Outskirts", "Soon, the rows of houses give way to more and more open space. As you being to wander away from the village center, you overhear a group of villagers gesturing and discussing passionately.", "Investigate", "Enter the Tavern", "Return to Village Center", investigate, goToTavern, goToVillage, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f49b7fed-bb8c-4ce3-b207-f7ea09481dc9/d8ze8pd-63453f43-6bad-457b-b6e5-304a8013200e.png/v1/fill/w_1036,h_772,q_70,strp/pirogovo_2_by_vityar83_d8ze8pd-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDE4IiwicGF0aCI6IlwvZlwvZjQ5YjdmZWQtYmI4Yy00Y2UzLWIyMDctZjdlYTA5NDgxZGM5XC9kOHplOHBkLTYzNDUzZjQzLTZiYWQtNDU3Yi1iNmU1LTMwNGE4MDEzMjAwZS5wbmciLCJ3aWR0aCI6Ijw9MTM2NiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6OqyMRbB291fO2AUZeB6Eek3qL0Xp_N6cQ13QXWqbVc");
+    continueStory("Village Outskirts", "The rows of village houses give way to more and more open space. As you being to wander away from the village center, you overhear a group of villagers muttering and gesturing passionately.", "Investigate", "Enter the Tavern", "Return to Village Center", investigate, goToTavern, goToVillage, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f49b7fed-bb8c-4ce3-b207-f7ea09481dc9/d8ze8pd-63453f43-6bad-457b-b6e5-304a8013200e.png/v1/fill/w_1036,h_772,q_70,strp/pirogovo_2_by_vityar83_d8ze8pd-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDE4IiwicGF0aCI6IlwvZlwvZjQ5YjdmZWQtYmI4Yy00Y2UzLWIyMDctZjdlYTA5NDgxZGM5XC9kOHplOHBkLTYzNDUzZjQzLTZiYWQtNDU3Yi1iNmU1LTMwNGE4MDEzMjAwZS5wbmciLCJ3aWR0aCI6Ijw9MTM2NiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.6OqyMRbB291fO2AUZeB6Eek3qL0Xp_N6cQ13QXWqbVc");
 }
 
 function goToCastle() {
@@ -62,22 +64,33 @@ function goToTreasureRoom() {
 }
 
 // Minigames
-function repairHomes() {
+function catchThief() {
+    continueStory("Thief", "The villagers have just discovered that one of the Abastel siblings has been stealing from the community silos, but since the siblings look quite alike, they can't figure out who it is. The Abastels are named Tarron, Cyrus, Fen, and Myrr. Here's what the villagers have confirmed: <ul><li>Although the siblings started the evening in the tavern, the crime couldn't have occurred there as too many people were watching.</li><li>The siblings left the tavern at different times: one at 9:00pm, one at 9:30pm, one at 10:00pm, and one at 10:30pm.</li><li>The grain had been stolen before 9:20pm.</li><li>The siblings are aged 18, 22, 23, and 25.</li><li>The oldest sibling left the tavern 30 minutes earlier than Cyrus.</li><li>Tarron left the tavern later than Myrr.</li><li>Tarron is 22.</li><li>The youngest sibling left the tavern at 9:00.</li><li>The sibling who left the tavern at 9:30pm is either Cyrus or the 22-year-old.</li></ul> Who is the thief?", "Enter the Tavern", "Return to Village Center", "Give up", goToTavern, goToVillage, goToOutskirts, "https://images.unsplash.com/photo-1501430654243-c934cec2e1c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
     hideButtons();
-    showInput("Calculate");
-    continueStory("Sorting Cattle", "It turns out all the cows have wandered into one area and the villagers are trying to figure out how many cows they each have. 'I have twice as many cows as Silva,' says Zahra. 'I have two more cows than Zahra,' says Rishi. There are 42 cows in total. How many cows does Rishi own?", "Go to the Market", "Enter the Tavern", "Return to Village Center", goToMarket, goToTavern, goToVillage, "https://images.unsplash.com/photo-1566040924976-f837330d1a5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+    showInput("Guess");
+    submitButtonElement.onclick = () => {
+        let guess = inputElement.value;
+        if (guess === "Myrr") {
+            caughtThief = true;
+            army += 20;
+            alert("Myrr, you proclaim. After explaining your flawless logic, Myrr pales and then confesses. 'Thanks for sorting that out!' one of the villagers says. 'We'd have been short on food during the winter without you!'");
+            goToOutskirts();
+        } else {
+            alert("You guess " + guess + ", but you can't back up your accusation with proof, and the confusion continues. Try again?");
+        }
+    }
 }
 
 function sortCattle() {
+    continueStory("Sorting Cattle", "It turns out all the cows have wandered into one area and the villagers are trying to figure out how many cows they each have. 'I have twice as many cows as Silva,' says Zahra. 'I have two more cows than Zahra,' says Rishi. There are 42 cows in total. How many cows does Rishi own?", "Enter the Tavern", "Return to Village Center", "Give up", goToTavern, goToVillage, goToOutskirts, "https://images.unsplash.com/photo-1566040924976-f837330d1a5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
     hideButtons();
     showInput("Calculate");
-    continueStory("Sorting Cattle", "It turns out all the cows have wandered into one area and the villagers are trying to figure out how many cows they each have. 'I have twice as many cows as Silva,' says Zahra. 'I have two more cows than Zahra,' says Rishi. There are 42 cows in total. How many cows does Rishi own?", "Go to the Market", "Enter the Tavern", "Return to Village Center", goToMarket, goToTavern, goToVillage, "https://images.unsplash.com/photo-1566040924976-f837330d1a5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
     submitButtonElement.onclick = () => {
         let guess = inputElement.value;
         if (guess == 18) {
+            sortedCattle = true;
             army += 20;
             alert("You're as cool as a cucumber as you handle the crisis, correctly giving Silva 8 cows, Zahra 16 cows, and Rishi 18 cows. You become very popular with the villagers, who dub you the magistrate.");
-            showButtons();
             goToOutskirts();
         } else {
             alert("You take a guess, but " + guess + " isn't the right number of cows, and the confusion continues. Try again?");
@@ -113,7 +126,7 @@ function gamble() {
 }
 
 function goToTavern() {
-    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
+    continueStory("Tavern", "You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/59e52d58-8bc8-4cc1-b8ea-7c573c3f0d9d/dc5agah-531475c9-64cf-46f1-9c7e-35e7ea362aa6.jpg/v1/fill/w_800,h_480,q_75,strp/dizzy_hearts__tavern_by_exitmothership_dc5agah-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD00ODAiLCJwYXRoIjoiXC9mXC81OWU1MmQ1OC04YmM4LTRjYzEtYjhlYS03YzU3M2MzZjBkOWRcL2RjNWFnYWgtNTMxNDc1YzktNjRjZi00NmYxLTljN2UtMzVlN2VhMzYyYWE2LmpwZyIsIndpZHRoIjoiPD04MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.qXK79wqJngpyzjlQqdSrtH3SlYqbNpw8qiVBdGlG-88");
 }
 
 // Transactions
@@ -162,7 +175,6 @@ function shareTreasure() {
 }
 
 function buyDrink() {
-    alert("got to drink");
     purchase(5, "You bought a mug of artisan water. It tasted like normal water.", "You don't have enough money to buy a drink.");
 }
 
@@ -178,10 +190,18 @@ function battle() {
 
 // Moving Between Locations
 function investigate() {
-    if (Math.random() < 0.5) {
+    if (!caughtThief && !sortedCattle) {
+        if (Math.random() < 0.5) {
+            sortCattle();
+        } else {
+            catchThief();
+        }
+    } else if (!caughtThief) {
+        catchThief();
+    } else if (!sortedCattle) {
         sortCattle();
     } else {
-        repairHomes();
+        alert("Seems like they're just making small talk. The villagers disperse after awhile.")
     }
 }
 
@@ -231,6 +251,7 @@ function play() {
     for (let i = 0; i < items.length; i++) {
         items[i].hasItem = false;
     }
+    caughtThief, sortedCattle = false;
     //go to woods
     continueStory("Our Journey Begins...", "Welcome, explorer! You're on a grand, perilous, magical quest to buy a delicious taco &#127790;. At the moment, however, you're stuck in some unfamiliar woods. Survive the wilderness and escape the forest first!", "Go Left", "Go Right", "CHEAT: Skip to village", goToRiver, goToCliff, goToVillage, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
@@ -238,6 +259,7 @@ function play() {
 function continueStory(location, story, choice1, choice2, choice3, choice1Function, choice2Function, choice3Function, source) {
     showInventory();
     checkWin();
+    showButtons();
     h1Element.innerText = location;
     inputElement.style.display = "none";
     submitButtonElement.style.display = "none";
