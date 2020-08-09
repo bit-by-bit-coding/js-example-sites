@@ -32,7 +32,7 @@ function play() {
         items[i].hasItem = false;
     }
     //go to woods
-    continueStory("Welcome, explorer! You've just come to the woods, and your quest is to buy some delicious french fries.", "Go Left", "Go Right", "Die", goLeft, goRight, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Welcome, explorer! You've just come to the woods, and your quest is to buy some delicious french fries.", "Go Left", "Go Right", "Die", goToRiver, goToCliff, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 //Locations
@@ -123,7 +123,7 @@ function battle() {
 }
 
 // Transportation
-function goLeft() {
+function goToRiver() {
     continueStory("You find a rushing river. How will you cross it?", "Swim", "Boat", "Travel Interdimensionally", swim, goToBoat, interdimensionalTravel, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
@@ -146,14 +146,14 @@ function eatCheese() {
 }
 
 function interdimensionalTravel() {
-    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", goRight, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", goToCliff, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
 }
 
 function swim() {
-    badEnding("You bravely start swimming across the river, despite there being 10-foot-tall waves and also a literal boat right next to you. You're 2 feet away from the other bank when you step on something squishy. It's a sea slug! You died of surprise", goRight, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("You bravely start swimming across the river, despite there being 10-foot-tall waves and also a literal boat right next to you. You're 2 feet away from the other bank when you step on something squishy. It's a sea slug! You died of surprise", goToRiver, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
-function goRight() {
+function goToCliff() {
     badEnding("You accidentally walked off a cliff and died. Oops.", play, "https://images.unsplash.com/photo-1570877316396-0477e81e9d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
