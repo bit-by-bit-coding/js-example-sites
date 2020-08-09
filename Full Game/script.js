@@ -6,8 +6,9 @@ class Item {
     }
 }
 
-let items = [new Item("key", 20), new Item("ruby", 100)];
+let items = [new Item("key", 20), new Item("ruby", 100), new Item("french fries", 10000)];
 let coins = 0;
+let army = 0;
 
 // The DOM ------
 
@@ -26,11 +27,12 @@ play();
 function play() {
     //reset inventory
     coins = 0;
+    army = 0;
     for (let i = 0; i < items.length; i++) {
         items[i].hasItem = false;
     }
     //go to woods
-    continueStory("You came to the woods.", "Go Left", "Go Right", "Die", goLeft, goRight, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Welcome, explorer! You've just come to the woods, and your quest is to buy some delicious french fries.", "Go Left", "Go Right", "Die", goLeft, goRight, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 //Locations
@@ -53,12 +55,14 @@ function goToTreasureRoom() {
 
 // Transactions
 function buy() {
-    continueStory("What would you like to buy? Type 'key' into the input box, then click Submit.", "Sell instead", "Go back to the village", "Die randomly", sell, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    continueStory("What would you like to buy? Type 'key' or 'french fries' into the input box, then click Submit.", "Sell instead", "Go back to the village", "Die randomly", sell, goToVillage, die, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
     inputElement.style.display = "inline";
     submitButtonElement.style.display = "block";
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
             transact(items[0], true);
+        } else if (inputElemetn.value === "french fries") {
+            transact(items[2], true);
         } else {
             alert("That's not a valid item to buy.");
         }
@@ -86,7 +90,7 @@ function transact(item, isBuying) {
             item.hasItem = true;
             alert("You bought a " + item.name);
         } else {
-            alert("You don't have enough money for a " + item.name);
+            alert("You don't have enough money for a " + item.name + ". " + item.name + " costs " + item.value + ".");
         }
     } else {
         if (item.hasItem) {
@@ -98,6 +102,24 @@ function transact(item, isBuying) {
         }
     }
     showInventory();
+}
+
+function shareTreasure() {
+    if (coins >= army) {
+        coins -= army;
+        alert("You gave a coin to each member of your army.");
+        showInventory();
+    } else {
+        alert("You don't have enough money.");
+    }
+}
+
+function battle() {
+    if (army > 30) {
+        continueStory("Your massive army stands behind you. All of them unsheathe their swords and wave them in the air, unintentionally revealing their armpits. The dragon wrinkles her nose at all that body odor. Dragons have a sensitive sense of smell, you know. Anyway, you can take all the treasure now.", "Return to the village", "Share the treasure", "Die randomly", goToVillage, shareTreasure, die, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    } else {
+        badEnding("Unfortunately, the dragon was not in a good mood today. Maybe you need more support.", "https://i.pinimg.com/originals/80/7b/69/807b696afbd11692f90219a7922f2005.jpg");
+    }
 }
 
 // Transportation
@@ -120,19 +142,19 @@ function tryDoor() {
 
 // Fatal choices
 function eatCheese() {
-    badEnding("You nervously reach in your pocket and start nibbling some cheese. The dragon makes you into a grilled cheese sandwich. Did you really think eating cheese was going to solve the problem?", "https://images.unsplash.com/photo-1528736235302-52922df5c122?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1644&q=80");
+    badEnding("You nervously reach in your pocket and start nibbling some cheese. The dragon proceeds to make you into a grilled cheese sandwich. Eating cheese solves many problems, but this is not one of them.", goToTreasureRoom, "https://images.unsplash.com/photo-1528736235302-52922df5c122?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1644&q=80");
 }
 
 function interdimensionalTravel() {
-    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", goRight, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
 }
 
 function swim() {
-    badEnding("You bravely start swimming across the river, despite there being 10-foot-tall waves and also a literal boat right next to you. You're 2 feet away from the other bank when you step on something squishy. It's a sea slug! You died of surprise. Click either button to restart in the woods.", "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("You bravely start swimming across the river, despite there being 10-foot-tall waves and also a literal boat right next to you. You're 2 feet away from the other bank when you step on something squishy. It's a sea slug! You died of surprise", goRight, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goRight() {
-    badEnding("You accidentally walked off a cliff and died. Oops.", "https://images.unsplash.com/photo-1570877316396-0477e81e9d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("You accidentally walked off a cliff and died. Oops.", play, "https://images.unsplash.com/photo-1570877316396-0477e81e9d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function die() {
@@ -148,10 +170,10 @@ function continueStory(story, choice1, choice2, choice3, choice1Function, choice
     imageElement.src = source;
 }
 
-function badEnding(story, source) {
+function badEnding(story, lastLocation, source) {
     imageElement.src = source;
     pElement.innerText = story;
-    die();
+    changeButtons("Try from last checkpoint", "Restart", "Restart", lastLocation, play, play);
 }
 
 function changeButtons(choice1, choice2, choice3, choice1Function, choice2Function, choice3Function) {
