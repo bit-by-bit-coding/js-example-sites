@@ -6,7 +6,7 @@ class Item {
     }
 }
 
-let items = [new Item("key", 20), new Item("ruby", 100), new Item("french fries", 10000)];
+let items = [new Item("key", 20), new Item("ruby", 100), new Item("a bag of french fries", 10000)];
 let coins = 0;
 let army = 0;
 let isBuying = true;
@@ -14,6 +14,7 @@ let isBuying = true;
 // The DOM ------
 
 // Using HTML and JS
+let h1Element = document.getElementById("location");
 let pElement = document.getElementById("message");
 let imageElement = document.getElementById("picture");
 let button1Element = document.getElementById("button1");
@@ -33,7 +34,7 @@ function play() {
         items[i].hasItem = false;
     }
     //go to woods
-    continueStory("Welcome, explorer! You've just come to the woods, and your quest is to buy some delicious french fries.", "Go Left", "Go Right", "Die", goToRiver, goToCliff, die, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Welcome, explorer! You're on a grand, perilous, magical quest to buy some delicious french fries. At the moment, however, you're stuck in some unfamiliar woods. Survive the wilderness and escape the forest first!", "Go Left", "Go Right", "CHEAT: Skip to village", goToRiver, goToCliff, goToVillage, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 //Locations
@@ -42,9 +43,8 @@ function goToVillage() {
 }
 
 function goToMarket() {
-    continueStory("Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'a bag of french fries') into the input box and click Submit.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
-    inputElement.style.display = "inline";
-    submitButtonElement.style.display = "block";
+    continueStory("Welcome to the market! You can buy and sell items here. Select whether you want to buy or sell first. Then type what you want to trade (either 'key', 'ruby', or 'a bag of french fries') into the input box and click Trade.", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://i.ytimg.com/vi/19dx6AkC_GY/maxresdefault.jpg");
+    showInput("Trade");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
             transact(items[0], isBuying);
@@ -60,25 +60,50 @@ function goToMarket() {
 }
 
 function goToOutskirts() {
-    continueStory("You arrive at the outskirts of the village. There, several villagers", "Buy", "Sell", "Return to Village Center", buy, sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
-    inputElement.style.display = "inline";
-    submitButtonElement.style.display = "block";
+    continueStory("You arrive at the outskirts of the village. There, several villagers", "Buy", "Sell", "Return to Village Center", goToTavern, goToVillage, goToCastle, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
+    showInput("Calculate");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
-            transact(items[0], isBuying);
-        } else if (inputElement.value === "ruby") {
-            transact(items[1], isBuying);
-        } else if (inputElement.value === "a bag of french fries") {
-            transact(items[2], isBuying);
+
         } else {
             alert("That's not a valid item to trade.");
         }
     }
 }
 
+function goToTavern() {
+    continueStory("You slip into a warm tavern. You notice several villagers playing dice in the corner.", "Gamble", "Get a drink", "Leave the tavern", gamble, buyDrink, goToVillage, "https://images.unsplash.com/photo-1591804860948-cdb450a32b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80");
+}
+
+function gamble() {
+    continueStory("You decide to join the game of dice. Each die has twenty sides (you can roll a number between 1 and 20). If the two numbers on your dice are greater than 25, then each of the three villagers at the table will give you your bet. If you lose, you'll lose the money you betted. How much do you want to bet?", "Get a drink", "Leave the tavern", "Return to Village Center", buyDrink, goToTavern, goToVillage, "https://images.unsplash.com/photo-1570303345338-e1f0eddf4946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1265&q=80");
+    showInput("Bet and Play");
+    submitButtonElement.onclick = () => {
+        let bet = inputElement.value;
+        if (bet <= coins) {
+            let roll1 = Math.floor(Math.random() * 21);
+            let roll2 = Math.floor(Math.random() * 21);
+            let sum = roll1 + roll2;
+            alert("Your first die teeters and rolls on" + roll1 + "!");
+            alert("Your second die turns up as a..." + roll2 + "!");
+            if ((roll1 + roll2) > 25) {
+                alert("You rolled a total of " + sum + " and won! The three villagers give you " + bet + " coins apiece.");
+                coins += 3 * bet;
+                showInventory();
+            } else {
+                alert("You rolled a total of " + sum + " and lost. :( You reluctantly hand over your " + bet + "-coin bet.")
+                coins -= bet;
+                showInventory();
+            }
+        } else {
+            alert("You don't have " + bet + " coins.");
+        }
+    }
+}
+
 function goToCastle() {
     items[1].hasItem = true;
-    continueStory("You trudge up a hill to find a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images.unsplash.com/photo-1524397057410-1e775ed476f3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    continueStory("Above a hill sits a sprawling castle. You approach the gates in awe, until -- ouch -- you stub your toe. 'Fiddlesticks!' you say. Luckily, you stubbed your toe on a massive ruby, which you proceed to stuff in your pocket.", "Try the door", "Go down the hill to the village", "Die Randomly", tryDoor, goToVillage, die, "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6ff2ccfb-d302-4348-87bc-8b9568748e63/d7q7esw-bddb370b-31eb-401a-86eb-f68f437b69fe.jpg/v1/fill/w_723,h_1000,q_75,strp/sanctuary_by_jjcanvas_d7q7esw-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0xMDAwIiwicGF0aCI6IlwvZlwvNmZmMmNjZmItZDMwMi00MzQ4LTg3YmMtOGI5NTY4NzQ4ZTYzXC9kN3E3ZXN3LWJkZGIzNzBiLTMxZWItNDAxYS04NmViLWY2OGY0MzdiNjlmZS5qcGciLCJ3aWR0aCI6Ijw9NzIzIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.b52NvktP8FU_yXPDLPAvYapyKQma9VcKqsXjZbWEMf8");
 }
 
 function goToTreasureRoom() {
@@ -116,14 +141,23 @@ function transact(item, isBuying) {
     showInventory();
 }
 
-function shareTreasure() {
-    if (coins >= army) {
-        coins -= army;
-        alert("You gave a coin to each member of your army.");
+function purchase(cost, purchaseResult, needMoreMoney) {
+    if (coins >= cost) {
+        coins -= cost;
+        alert(purchaseResult);
         showInventory();
     } else {
-        alert("You don't have enough money.");
+        alert(needMoreMoney);
     }
+}
+
+function shareTreasure() {
+    purchase(army, "You gave a coin to each member of your army.", "You don't have enough money.");
+}
+
+function buyDrink() {
+    alert("got to drink");
+    purchase(5, "You bought a mug of artisan water. It tasted like normal water.", "You don't have enough money to buy a drink.");
 }
 
 function battle() {
@@ -150,7 +184,7 @@ function tryDoor() {
         alert("The door unlocked!");
         goToTreasureRoom();
     } else {
-        alert("You need a key.");
+        alert("The door is very locked. Maybe you should look for a key?");
     }
 }
 
@@ -160,17 +194,18 @@ function eatCheese() {
 }
 
 function interdimensionalTravel() {
-    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", goToCliff, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+    badEnding("You get stuck in a universe with only one dimension. Not sure how you're supposed to go back to existing...", goToRiver, "https://images.unsplash.com/photo-1529651795107-e5a141e34843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
 }
 
 function swim() {
-    badEnding("You bravely start swimming across the river, despite there being 10-foot-tall waves and also a literal boat right next to you. You're 2 feet away from the other bank when you step on something squishy. It's a sea slug! You died of surprise", goToRiver, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("You dive into the river, 10-foot tall waves frothing and storming around you! You battle couragenously through the turbulent whorls (conveniently ignoring how there was a literal boat next to you earlier). Finally, you feel the riverbed beneath your toes. You're two feet away from dry land when you step on something squishy. It's a sea slug! And...*gasp*...it's bright orange! You died of surprise. Try again?", goToRiver, "https://images.unsplash.com/photo-1518357019504-81a1bb8cda12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToCliff() {
-    badEnding("You accidentally walked off a cliff and died. Oops.", play, "https://images.unsplash.com/photo-1570877316396-0477e81e9d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    badEnding("You accidentally walked off a cliff and died. Oops. Keep your eyes on the road while wandering aimlessly in the wilderness :)", play, "https://images.unsplash.com/photo-1570877316396-0477e81e9d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
+// Functions to keep the game going
 function die() {
     changeButtons("Restart at the woods", "Restart at the woods", "Restart at the woods", play, play, play);
 }
@@ -201,12 +236,16 @@ function changeButtons(choice1, choice2, choice3, choice1Function, choice2Functi
 
 function showInventory() {
     p2Element.innerText = "You have in your pocket: some cheese";
-    for (let i = 0; i < pocket.length; i++) {
-        alert(items[i]);
+    for (let i = 0; i < items.length; i++) {
         if(items[i].hasItem) {
-            alert("has an item");
-            p2Element.innerText += ", a" + items[i].name;
+            p2Element.innerText += ", a " + items[i].name;
         }
     }
     p2Element.innerHTML += "<br> You have " + coins + " coins.";
+}
+
+function showInput(buttonText) {
+    inputElement.style.display = "inline";
+    submitButtonElement.style.display = "block";
+    submitButtonElement.innerText = buttonText;
 }
