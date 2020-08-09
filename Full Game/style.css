@@ -30,6 +30,14 @@ body {
     display: flex;
 }
 
+#response {
+    display: none;
+}
+
+#submit {
+    display: none;
+}
+
 img {
     max-width: 50vw;
     max-height: 60vh;

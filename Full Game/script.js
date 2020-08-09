@@ -1,10 +1,3 @@
-// Variables Activity ------
-let message = "Once upon a time...";
-//alert(message);
-message = "You woke up in an unfamiliar land.";
-//alert(message);
-let coins = 0;
-
 class Item {
     constructor(name, value, hasItem) {
         this.name = name;
@@ -14,6 +7,7 @@ class Item {
 }
 
 let items = [new Item("key", 20), new Item("ruby", 100)];
+let coins = 0;
 
 // The DOM ------
 
@@ -26,13 +20,19 @@ let p2Element = document.getElementById("pocket");
 let inputElement = document.getElementById("response")
 let submitButtonElement = document.getElementById("submit");
 
-goToWoods();
+play();
 
-//Locations
-function goToWoods() {
+function play() {
+    //reset inventory
+    coins = 0;
+    for (let i = 0; i < items.length; i++) {
+        items[i].hasItem = false;
+    }
+    //go to woods
     continueStory("You came to the woods.", "Go Left", "Go Right", goLeft, goRight, "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
+//Locations
 function goToVillage() {
     continueStory("You come to a bustling village.", "Go to the Market", "Die", goToMarket, die, "https://images.unsplash.com/photo-1508913950751-d1d139a29e68?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
@@ -48,6 +48,8 @@ function goToCastle() {
 
 // Transactions
 function buy() {
+    inputElement.style.display = "inline";
+    submitButtonElement.style.display = "block";
     continueStory("What would you like to buy? Type 'key' into the input box, then click Submit.", "Sell instead", "Go back to the village", sell, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "key") {
@@ -56,9 +58,12 @@ function buy() {
             alert("That's not a valid item to buy.");
         }
     }
+    showInventory();
 }
 
 function sell() {
+    inputElement.style.display = "inline";
+    submitButtonElement.style.display = "block";
     continueStory("What would you like to sell? Type 'ruby' into the input box, then click Submit.", "Buy instead", "Go back to the village", buy, goToVillage, "https://images.unsplash.com/photo-1530037768512-3c9a22715452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
     submitButtonElement.onclick = () => {
         if (inputElement.value === "ruby") {
@@ -91,10 +96,7 @@ function transact(item, isBuying) {
 
 // Transportation
 function goLeft() {
-    imageElement.src = "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
-    pElement.innerText = "You find a rushing river. How will you cross it? Click Choice 1 to go by boat. Click Choice 2 to start swimming.";
-    button1Element.onclick = goToBoat;
-    button2Element.onclick = swim;
+    continueStory("You find a rushing river. How will you cross it?", "Boat", "Swim", goToBoat, swim, "https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
 }
 
 function goToBoat() {
@@ -103,10 +105,11 @@ function goToBoat() {
 
 function tryDoor() {
     if (items[0].hasItem) {
-
+        alert("The door unlocked!");
     } else {
-
+        alert("You need a key.");
     }
+    die();
 }
 
 // Fatal choices
@@ -123,15 +126,11 @@ function goRight() {
 }
 
 function die() {
-    changeButtons("Restart at the woods", "Restart at the woods", goToWoods, goToWoods);
+    changeButtons("Restart at the woods", "Restart at the woods", play, play);
 }
 
 function continueStory(story, choice1, choice2, choice1Function, choice2Function, source) {
-    p2Element.innerText = "You have in your pocket: some air";
-    for (let i = 0; i < pocket.length; i++) {
-        p2Element.innerText += ", " + pocket[i].name;
-    }
-    p2Element.innerHTML = "<br> You have " + coins + " coins.";
+    showInventory();
     pElement.innerText = story;
     changeButtons(choice1, choice2, choice1Function, choice2Function);
     imageElement.src = source;
@@ -142,6 +141,14 @@ function changeButtons(choice1, choice2, choice1Function, choice2Function) {
     button2Element.innerText = choice2;
     button1Element.onclick = choice1Function;
     button2Element.onclick = choice2Function;
+}
+
+function showInventory() {
+    p2Element.innerText = "You have in your pocket: some air";
+    for (let i = 0; i < pocket.length; i++) {
+        p2Element.innerText += ", " + pocket[i].name;
+    }
+    p2Element.innerHTML = "<br> You have " + coins + " coins.";
 }
 
 //why not just change html? bc you can't vary it
