@@ -22,6 +22,10 @@ body {
     width: 40vw;
 }
 
+#buttons {
+    display: flex;
+}
+
 h1 {
     font-family: 'Suwannaphum', cursive;
 }
@@ -30,4 +34,19 @@ img {
     max-width: 50vw;
     max-height: 60vh;
     float: right;
+}
+
+button {
+    background-color: white;
+    
+    box-shadow: 0 0 5px black;
+    border: none;
+    margin: 15px;
+    width: 150px;
+    height: 40px;
+    transition-duration: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
 }
