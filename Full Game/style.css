@@ -26,8 +26,8 @@ body {
     display: flex;
 }
 
-h1 {
-    font-family: 'Suwannaphum', cursive;
+#input {
+    display: flex;
 }
 
 img {
@@ -41,9 +41,10 @@ button {
     
     box-shadow: 0 0 5px black;
     border: none;
+    border-radius: 20px;
     margin: 15px;
     width: 150px;
-    height: 40px;
+    height: 35px;
     transition-duration: 0.3s;
 }
 

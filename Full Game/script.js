@@ -23,22 +23,10 @@ let imageElement = document.getElementById("picture");
 let button1Element = document.getElementById("button1");
 let button2Element = document.getElementById("button2");
 let p2Element = document.getElementById("pocket");
+let inputElement = document.getElementById("response")
+let submitButtonElement = document.getElementById("submit");
 
-// Using pure JS
-let inputElement = document.createElement("input");
-document.body.appendChild(inputElement);
-let submitButtonElement = document.createElement("button");
-document.body.appendChild(submitButtonElement);
-submitButtonElement.innerText = "Submit";
-
-//innerText and src
-pElement.innerText = message;
-imageElement.src = "https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60";
-
-button1Element.innerText = "Choice 1";
-button2Element.innerText = "Choice 2";
-
-button1Element.onclick = goToWoods;
+goToWoods();
 
 //Locations
 function goToWoods() {
